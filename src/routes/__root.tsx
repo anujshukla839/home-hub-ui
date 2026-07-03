@@ -77,14 +77,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Aura — Home Automation Dashboard" },
+      {
+        name: "description",
+        content:
+          "Control lights, climate, security, and media across every room from a single calm, tactile home dashboard.",
+      },
+      { name: "author", content: "Aura" },
+      { property: "og:title", content: "Aura — Home Automation Dashboard" },
+      {
+        property: "og:description",
+        content:
+          "A calm, tactile control surface for your smart home. Scenes, climate, lighting, security in one place.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+
     ],
     links: [
       {
