@@ -1,249 +1,121 @@
-import { createFileRoute } from "@tanstack/react-router";
-import sceneMovie from "@/assets/scene-movie.jpg";
-import sceneMorning from "@/assets/scene-morning.jpg";
-import sceneWork from "@/assets/scene-work.jpg";
-import sceneNight from "@/assets/scene-night.jpg";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowUpRight } from "lucide-react";
+import { Hero } from "@/components/sections/Hero";
+import { ServicesGrid } from "@/components/sections/ServicesGrid";
+import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
+import { BrandsMarquee } from "@/components/sections/BrandsMarquee";
+import { Testimonials } from "@/components/sections/Testimonials";
+import { FAQAccordion } from "@/components/sections/FAQAccordion";
+import { CtaBand } from "@/components/sections/CtaBand";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Reveal } from "@/components/ui/Reveal";
+import { projects } from "@/lib/projects-data";
+import { faqs } from "@/lib/faq-data";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Aura — Home Automation Dashboard" },
+      { title: "NES Automation — Luxury Smart Home Automation" },
       {
         name: "description",
         content:
-          "Control lights, climate, security, and media across every room from a single calm, tactile home dashboard.",
+          "Transform your home into an intelligent living experience. Smart home automation, lighting, security, home cinema and AV for luxury villas, apartments, hotels and offices.",
       },
-      { property: "og:title", content: "Aura — Home Automation Dashboard" },
+      { property: "og:title", content: "NES Automation — Luxury Smart Home Automation" },
       {
         property: "og:description",
         content:
-          "A calm, tactile control surface for your smart home. Scenes, climate, lighting, security in one place.",
+          "Luxury smart home automation, lighting, security and AV integration — quietly, beautifully in your control.",
       },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "/" },
     ],
+    links: [{ rel: "canonical", href: "/" }],
   }),
   component: Home,
 });
 
-const scenes = [
-  { title: "Movie Night", meta: "6 Devices controlled", img: sceneMovie },
-  { title: "Good Morning", meta: "Scheduled 7:00 AM", img: sceneMorning },
-  { title: "Work Focus", meta: "Cool lighting active", img: sceneWork },
-  { title: "Night Mode", meta: "Motion sensors active", img: sceneNight },
-];
-
 function Home() {
+  const featured = projects.slice(0, 3);
   return (
-    <div className="min-h-screen bg-obsidian text-foreground font-sans p-6 md:p-12 pb-32">
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;500;600&display=swap"
-        rel="stylesheet"
-      />
+    <>
+      <Hero />
 
-      <header className="max-w-6xl mx-auto flex justify-between items-end mb-16">
-        <div>
-          <h1 className="text-4xl md:text-5xl font-display font-light text-foreground tracking-tight">
-            Good Evening, <span className="font-medium">Alex</span>
-          </h1>
-          <p className="text-muted-foreground mt-2 font-light">
-            Everything is secure. 4 devices active.
-          </p>
-        </div>
-        <div className="text-right hidden md:block">
-          <div className="text-2xl font-display text-foreground">72°F</div>
-          <div className="text-xs uppercase tracking-widest text-lume font-medium">
-            Indoor Climate
+      <section className="py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-6 md:px-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14">
+            <SectionHeading
+              eyebrow="What we do"
+              title="A complete language of smart living."
+              description="From lighting scenes to full-property automation, every service is engineered for reliability and designed to disappear into the architecture."
+            />
+            <Link
+              to="/services"
+              className="inline-flex items-center gap-2 text-sm text-crimson hover:gap-3 transition-all"
+            >
+              All 20 services <ArrowUpRight className="size-4" />
+            </Link>
           </div>
+          <ServicesGrid limit={6} />
         </div>
-      </header>
+      </section>
 
-      <main className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8">
-        {/* Climate */}
-        <section className="md:col-span-8 bg-graphite rounded-3xl p-8 border border-border relative overflow-hidden">
-          <div className="relative z-10">
-            <div className="flex justify-between items-start mb-12">
-              <div>
-                <span className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">
-                  Climate Control
-                </span>
-                <h2 className="text-2xl font-display mt-1 text-foreground">
-                  Living Room
-                </h2>
-              </div>
-              <div className="size-12 rounded-full bg-lume/10 border border-lume/20 flex items-center justify-center">
-                <div className="size-2 rounded-full bg-lume" />
-              </div>
-            </div>
+      <WhyChooseUs />
 
-            <div className="flex items-center gap-12 flex-wrap">
-              <div className="relative">
-                <div className="size-48 rounded-full border-[12px] border-obsidian flex items-center justify-center shadow-2xl">
-                  <span className="text-6xl font-display font-light text-foreground">
-                    22
-                  </span>
-                  <span className="text-2xl font-display font-light text-muted-foreground self-start mt-4">
-                    °
-                  </span>
-                </div>
-                <div className="absolute inset-0 rounded-full border-2 border-dashed border-border rotate-45 pointer-events-none" />
-              </div>
-
-              <div className="flex-1 min-w-[200px] space-y-6">
-                <Stat label="Humidity" value="42%" pct={42} tone="lume" />
-                <Stat
-                  label="Air Quality"
-                  value="Excellent"
-                  pct={95}
-                  tone="emerald"
-                />
-              </div>
-            </div>
+      <section className="py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-6 md:px-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14">
+            <SectionHeading
+              eyebrow="Featured work"
+              title="Recent projects that redefine home."
+            />
+            <Link to="/projects" className="inline-flex items-center gap-2 text-sm text-crimson hover:gap-3 transition-all">
+              View portfolio <ArrowUpRight className="size-4" />
+            </Link>
           </div>
-
-          <div className="absolute -bottom-24 -right-24 size-64 bg-lume/5 blur-[100px] rounded-full pointer-events-none" />
-        </section>
-
-        {/* Quick actions */}
-        <div className="md:col-span-4 space-y-4">
-          <QuickTile
-            title="Smart Lighting"
-            meta="8 Lamps • 60% Brightness"
-            on
-          />
-          <QuickTile title="Sonos Arc" meta="Playing • Night Trax" on={false} />
-
-          <div className="bg-lume rounded-3xl p-6 flex flex-col justify-between h-[160px] text-obsidian">
-            <div className="text-xs uppercase tracking-widest font-bold opacity-60">
-              Security System
-            </div>
-            <div>
-              <div className="text-2xl font-display font-semibold">
-                Fully Armed
-              </div>
-              <div className="text-sm font-medium opacity-80">
-                Last check: 2 mins ago
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Scenes */}
-        <section className="md:col-span-12 mt-4">
-          <h3 className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-bold mb-6">
-            Active Scenes
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {scenes.map((s) => (
-              <article
-                key={s.title}
-                className="relative aspect-[4/3] rounded-3xl overflow-hidden border border-border group cursor-pointer"
-              >
-                <img
-                  src={s.img}
-                  alt={s.title}
-                  width={800}
-                  height={608}
-                  loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute bottom-5 left-5">
-                  <div className="text-sm font-medium text-white">
-                    {s.title}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {featured.map((p, i) => (
+              <Reveal key={p.slug} variant="up" delay={i * 0.08}>
+                <Link
+                  to="/projects"
+                  className="group block relative aspect-[4/5] rounded-3xl overflow-hidden border border-border"
+                >
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    width={1280}
+                    height={960}
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/40 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-8">
+                    <div className="text-[10px] uppercase tracking-[0.3em] text-crimson font-semibold">
+                      {p.category} · {p.location}
+                    </div>
+                    <h3 className="mt-3 font-display text-2xl">{p.title}</h3>
+                    <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{p.description}</p>
                   </div>
-                  <div className="text-[10px] text-white/60">{s.meta}</div>
-                </div>
-              </article>
+                </Link>
+              </Reveal>
             ))}
           </div>
-        </section>
-      </main>
-
-      <nav className="fixed bottom-8 left-1/2 -translate-x-1/2 bg-graphite/80 backdrop-blur-xl border border-border rounded-full px-8 py-4 flex items-center gap-10 z-50 shadow-2xl">
-        <button className="text-lume text-xs font-bold uppercase tracking-widest">
-          Home
-        </button>
-        <button className="text-muted-foreground text-xs font-bold uppercase tracking-widest hover:text-foreground transition-colors">
-          Rooms
-        </button>
-        <button className="text-muted-foreground text-xs font-bold uppercase tracking-widest hover:text-foreground transition-colors">
-          Scenes
-        </button>
-        <button className="text-muted-foreground text-xs font-bold uppercase tracking-widest hover:text-foreground transition-colors">
-          Stats
-        </button>
-      </nav>
-    </div>
-  );
-}
-
-function Stat({
-  label,
-  value,
-  pct,
-  tone,
-}: {
-  label: string;
-  value: string;
-  pct: number;
-  tone: "lume" | "emerald";
-}) {
-  const bar =
-    tone === "lume" ? "bg-lume" : "bg-emerald-500";
-  return (
-    <div className="space-y-2">
-      <div className="flex justify-between text-xs uppercase tracking-tighter text-muted-foreground font-medium">
-        <span>{label}</span>
-        <span>{value}</span>
-      </div>
-      <div className="h-1 bg-obsidian rounded-full overflow-hidden">
-        <div
-          className={`h-full ${bar} rounded-full`}
-          style={{ width: `${pct}%` }}
-        />
-      </div>
-    </div>
-  );
-}
-
-function QuickTile({
-  title,
-  meta,
-  on,
-}: {
-  title: string;
-  meta: string;
-  on: boolean;
-}) {
-  return (
-    <button className="w-full bg-graphite rounded-3xl p-6 border border-border flex items-center justify-between group cursor-pointer hover:bg-white/5 transition-colors text-left">
-      <div className="flex items-center gap-4">
-        <div className="size-10 bg-obsidian rounded-xl flex items-center justify-center border border-border">
-          <div
-            className={`size-3 rounded-sm border ${
-              on ? "border-lume/60" : "border-muted-foreground/50"
-            }`}
-          />
         </div>
-        <div>
-          <div className="text-sm font-medium text-foreground">{title}</div>
-          <div className="text-xs text-muted-foreground">{meta}</div>
+      </section>
+
+      <BrandsMarquee />
+
+      <Testimonials />
+
+      <CtaBand />
+
+      <section className="py-24 md:py-32">
+        <div className="max-w-5xl mx-auto px-6 md:px-10">
+          <SectionHeading eyebrow="Answered" title="Common questions." align="center" />
+          <div className="mt-14">
+            <FAQAccordion items={faqs.slice(0, 5)} />
+          </div>
         </div>
-      </div>
-      <span
-        className={`w-10 h-6 rounded-full p-1 flex ${
-          on ? "bg-lume justify-end" : "bg-secondary justify-start"
-        }`}
-      >
-        <span
-          className={`size-4 rounded-full ${
-            on ? "bg-white" : "bg-muted-foreground"
-          }`}
-        />
-      </span>
-    </button>
+      </section>
+    </>
   );
 }
